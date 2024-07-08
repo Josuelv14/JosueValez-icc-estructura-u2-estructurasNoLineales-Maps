@@ -28,8 +28,33 @@ public class Ejercicios {
      * frecuencia.
      */
     public static boolean areAnagrams(String str1, String str2) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        
+        if (str1.length() != str2.length()) return false;{
+            HashMap<Character, Integer> conteoCaracteresMap1 = new HashMap<>();      
+            HashMap<Character, Integer> conteoCaracteresMap2 = new HashMap<>();   
 
+
+
+            //Barrido para comparar los dos mapas
+            for(Character c : str1.toCharArray()){
+                conteoCaracteresMap1.put(c, conteoCaracteresMap1.getOrDefault(c,0)+1);
+                // Se obtiene el valor de la clave
+                // de cada mapa si no exitiese en un return false
+                // So ñps vañpres son diferentes return false
+            }
+            for(Character c : str2.toCharArray()){
+                conteoCaracteresMap2.put(c, conteoCaracteresMap2.getOrDefault(c,0)+1);
+                // Se obtiene el valor de la clave
+                // de cada mapa si no exitiese en un return false
+                // So ñps vañpres son diferentes return false
+            }
+            for (Character character : conteoCaracteresMap1.keySet()){
+                if (!conteoCaracteresMap2.containsKey(character)) ||
+                
+            }
+            return true;
+            
+        }
     }
 
     /*
