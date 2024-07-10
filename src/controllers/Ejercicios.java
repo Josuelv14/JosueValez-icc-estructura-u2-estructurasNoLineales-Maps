@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Ejercicios {
 
@@ -28,35 +29,36 @@ public class Ejercicios {
      * frecuencia.
      */
     public static boolean areAnagrams(String str1, String str2) {
-        
-        if (str1.length() != str2.length()) return false;{
-            HashMap<Character, Integer> conteoCaracteresMap1 = new HashMap<>();      
-            HashMap<Character, Integer> conteoCaracteresMap2 = new HashMap<>();   
-
-
-
-            //Barrido para comparar los dos mapas
-            for(Character c : str1.toCharArray()){
-                conteoCaracteresMap1.put(c, conteoCaracteresMap1.getOrDefault(c,0)+1);
-                // Se obtiene el valor de la clave
-                // de cada mapa si no exitiese en un return false
-                // So ñps vañpres son diferentes return false
-            }
-            for(Character c : str2.toCharArray()){
-                conteoCaracteresMap2.put(c, conteoCaracteresMap2.getOrDefault(c,0)+1);
-                // Se obtiene el valor de la clave
-                // de cada mapa si no exitiese en un return false
-                // So ñps vañpres son diferentes return false
-            }
-            for (Character character : conteoCaracteresMap1.keySet()){
-                if (!conteoCaracteresMap2.containsKey(character)) ||
-                
-            }
-            return true;
-            
+        // Verificar si las longitudes de las cadenas son diferentes
+        if (str1.length() != str2.length()) {
+            return false;
         }
+    
+        // Crear mapas para contar los caracteres de ambas cadenas
+        HashMap<Character, Integer> conteoCaracteresMap1 = new HashMap<>();
+        HashMap<Character, Integer> conteoCaracteresMap2 = new HashMap<>();
+    
+        // Contar frecuencia de caracteres en la primera cadena
+        for (char c : str1.toCharArray()) {
+            conteoCaracteresMap1.put(c, conteoCaracteresMap1.getOrDefault(c, 0) + 1);
+        }
+    
+        // Contar frecuencia de caracteres en la segunda cadena
+        for (char c : str2.toCharArray()) {
+            conteoCaracteresMap2.put(c, conteoCaracteresMap2.getOrDefault(c, 0) + 1);
+        }
+    
+        // Comparar los mapas para verificar si son anagramas
+        for (char c : conteoCaracteresMap1.keySet()) {
+            if (!conteoCaracteresMap2.containsKey(c) || 
+                !conteoCaracteresMap1.get(c).equals(conteoCaracteresMap2.get(c))) {
+                return false;
+            }
+        }
+    
+        // Si todas las comparaciones fueron exitosas, las cadenas son anagramas
+        return true;
     }
-
     /*
      * Dado un array de números enteros y un objetivo, retorna los índices de dos
      * números para los que la suma de ambos sea igual al objetivo.
@@ -73,6 +75,23 @@ public class Ejercicios {
      * Output: null
      */
     public int[] sumatoriaDeDos(int[] nums, int objetivo) {
-        throw new UnsupportedOperationException("Not implemented yet");
+    // Crear un mapa para almacenar el complemento y su índice
+    Map<Integer, Integer> map = new HashMap<>();
+    
+    // Iterar por el array
+    for (int i = 0; i < nums.length; i++) {
+        int complemento = objetivo - nums[i];
+        
+        // Si el complemento está en el mapa, encontramos la solución
+        if (map.containsKey(complemento)) {
+            return new int[] { map.get(complemento), i };
+        }
+        
+        // Si no está en el mapa, almacenar el número actual y su índice
+        map.put(nums[i], i);
     }
+    
+    // Si no se encuentra ninguna pareja que cumpla la condición
+    return null;
+}
 }
